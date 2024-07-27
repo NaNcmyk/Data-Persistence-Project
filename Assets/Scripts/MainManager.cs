@@ -60,6 +60,16 @@ public class MainManager : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
         }
+
+        ReturnToMainMenu();
+    }
+
+    void ReturnToMainMenu()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     void AddPoint(int point)
