@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
-using UnityEditorInternal;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -12,11 +11,12 @@ using UnityEditor;
 
 public class MenuUI : MonoBehaviour
 {
-    public Button startButton;
+    Button startButton;
     void Start()
     {
         startButton = GameObject.FindWithTag("StartButton").GetComponent<Button>();
         startButton.interactable = false; // disable start button on start
+        PlayerDataManager.Instance.LoadBestScore();
     }
 
     // START BUTTON - on click function ------------------------------------------------
@@ -44,7 +44,7 @@ public class MenuUI : MonoBehaviour
     {
         string formattedName = "";
 
-        // replace non-alphanumeric chars with dashes
+        // replace non-alphanumeric chars (emojis, spaces, symbols, etc.) with dashes
         foreach (char letter in name)
         {
             if (!char.IsLetterOrDigit(letter))
